@@ -80,7 +80,7 @@ app.post('/webhook/', function(req, res) {
                     console.log("Sender ID: " + sender + " " + name);
                     var line = text.toLowerCase();
                     if (line.match(/hi/g) || line.match(/hello/g) || line.match(/hey/g) || line.match(/get/g)) {
-						client.query("CREATE TABLE IF NOT EXISTS BOTUSERS(UserID varchar(100), firstname varchar(100)");
+						client.query("CREATE TABLE BOTUSERS(UserID varchar(100), firstname varchar(100)");
 						client.query("INSERT INTO botusers(UserID, firstname) values($1, $2)", [sender, name]);
                         sendTextMessage(sender, "Hey " + name + "!");
                         // setTimeout(function() {
