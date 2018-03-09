@@ -71,12 +71,12 @@ app.post('/webhook/', function(req, res) {
                             if (err) throw err;
 							else
 							{
-								for(var i=0;i<result.rows.length;i++)
-								sendTextMessage(sender, "New Pic : " + result.rows[i].firstname);
-							sendimageMessage(sender,imgurl);
+								for(var i=0;i<result.rows.length;i++){
+								//sendTextMessage(sender, "New Pic : " + result.rows[i].firstname);
+								sendimageMessage(sender,imgurl);}
 							}
 						});
-						sendTextMessage(sender, "New Pic : " + imgurl);
+						sendTextMessage(sender, "Thanx for the pic");
 
 				}
                 else if (event.message && event.message.text) {
