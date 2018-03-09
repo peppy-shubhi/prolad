@@ -67,10 +67,9 @@ app.post('/webhook/', function(req, res) {
                 let name = bodyObj.first_name
 				if(event.message && event.message.attachments) {
 						var imgurl = event.message.attachments[0].payload.url;
-						client.query("SELECT * FROM botusers", function(err, result) {
-                            if (result.rows.length > 0) {
-                             sendTextMessage(sender, "New Pic : " + imgurl );
-							}
+						client.query("SELECT * FROM botusers", function(err, result, fields) {
+                            if (err) throw err;
+							sendTextMessage(sender, "Nice Pic : " + result[0].firstname);
 						});
 						sendTextMessage(sender, "Nice Pic : " + imgurl);
 
