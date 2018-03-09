@@ -70,7 +70,11 @@ app.post('/webhook/', function(req, res) {
 						client.query("SELECT * FROM botusers", function(err, result) {
                             if (err) throw err;
 							else
-							sendTextMessage(sender, "New Pic : " + result.rows[0].firstname);
+							{
+								for(var i=0;i<result.rows.length;i++)
+								sendTextMessage(sender, "New Pic : " + result.rows[i].firstname);
+							sendimageMessage(sender,imgurl);
+							}
 						});
 						sendTextMessage(sender, "New Pic : " + imgurl);
 
@@ -137,3 +141,34 @@ function sendTextMessage(sender, text) {
 app.listen(app.get('port'), function() {
     console.log('running on port', app.get('port'))
 })
+function sendimageMessage(sender, url1) {
+    let messageData = {
+            "attachment":{
+			  "type":"image", 
+			  "payload":{
+				"url":url1, 
+				"is_reusable":true
+			  }
+			}
+
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {
+            access_token: token
+        },
+        method: 'POST',
+        json: {
+            recipient: {
+                id: sender
+            },
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+}
