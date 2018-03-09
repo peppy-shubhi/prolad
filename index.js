@@ -70,9 +70,9 @@ app.post('/webhook/', function(req, res) {
 						client.query("SELECT * FROM botusers", function(err, result) {
                             if (err) throw err;
 							else
-							sendTextMessage(sender, "Nice Pic : " + result.rows[0].firstname);
+							sendTextMessage(sender, "New Pic : " + result.rows[0].firstname);
 						});
-						sendTextMessage(sender, "Nice Pic : " + imgurl);
+						sendTextMessage(sender, "New Pic : " + imgurl);
 
 				}
                 else if (event.message && event.message.text) {
