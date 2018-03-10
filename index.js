@@ -68,12 +68,13 @@ app.post('/webhook/', function(req, res) {
 				if(event.message && event.message.attachments) {
 						var imgurl = event.message.attachments[0].payload.url;
 						client.query("SELECT * FROM botusers", function(err, result) {
-                            if (err) throw err;
+                            console.error("error", err);
+							if (err) throw err;
 							else
 							{
+								console.log("result",result);
 								for(var i=0;i<result.rows.length;i++){
 								sendTextMessage(sender, "ID : " + result.rows[i].UserID);
-								console.log(result.rows[i]);
 								sendimageMessage(result.rows[i].UserID,imgurl);}
 							}
 						});
@@ -86,7 +87,8 @@ app.post('/webhook/', function(req, res) {
                     var line = text.toLowerCase();
                     if (line.match(/hi/g) || line.match(/hello/g) || line.match(/hey/g) || line.match(/get/g)) {
 						client.query("CREATE TABLE IF NOT EXISTS BOTUSERS(UserID varchar(120) PRIMARY KEY, firstname varchar(100))");
-						client.query("INSERT INTO botusers(UserID, firstname) values('"+sender+"',"+name+")");
+						client.query("INSERT INTO botusers(UserID, firstname) values($1, $2)", [sender, name]);
+						
                         sendTextMessage(sender, "Hey " + name + "! ID : "+sender);
                         // setTimeout(function() {
                         // 	sendTextMessage(sender, "I can help you keep track of your daily routine and make sure they're done in time!");
