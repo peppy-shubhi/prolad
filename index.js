@@ -79,7 +79,7 @@ app.post('/webhook/', function(req, res) {
 								console.log(result.rows);
 								//console.log(result.rows.anonymous);
 								for(var i = 0;i<result.rows.length;i++){
-									sendTextMessage(sender,"New Pic");
+									
 									sendimageMessage(result.rows[i].userid,imgurl);
 								}
 							}
@@ -99,13 +99,11 @@ app.post('/webhook/', function(req, res) {
 						client.query("CREATE TABLE IF NOT EXISTS BOTUSERS(UserID varchar(120) PRIMARY KEY, firstname varchar(100))");
 						client.query("INSERT INTO botusers(UserID, firstname) values($1, $2)", [sender, name]);
 						
-                        sendTextMessage(sender, "Hey " + name + "Welcome to a world of exposing the wrong doers anonymously");
+                        sendTextMessage(sender, "Hey! " + name + " Welcome to a world of exposing the wrong doers anonymously");
                         // setTimeout(function() {
                         // 	sendTextMessage(sender, "I can help you keep track of your daily routine and make sure they're done in time!");
                         // }, 200);
-                        setTimeout(function() {	
-                            sendTextMessage(sender, "Welcome!");
-                        }, 300);
+                        
 
                     }  
                     else {
