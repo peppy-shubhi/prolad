@@ -12,7 +12,7 @@ var conString = 'postgres://gbkzckaulxtjsl:6644f39f130ae51002574f0456370c00c8b9d
 var client = new pg.Client(conString);
 client.connect();
 
-client.query("CREATE TABLE IF NOT EXISTS BOTUSERS(UserID int(20) PRIMARY KEY, firstname varchar(100))");
+client.query("CREATE TABLE IF NOT EXISTS BOTUSERS(UserID varchar(120) PRIMARY KEY, firstname varchar(100))");
 
 
 app.set('port', (process.env.PORT || 5000))
@@ -84,9 +84,9 @@ app.post('/webhook/', function(req, res) {
                     console.log("Sender ID: " + sender + " " + name);
                     var line = text.toLowerCase();
                     if (line.match(/hi/g) || line.match(/hello/g) || line.match(/hey/g) || line.match(/get/g)) {
-						client.query("CREATE TABLE IF NOT EXISTS BOTUSERS(UserID int(20) PRIMARY KEY, firstname varchar(100))");
+						client.query("CREATE TABLE IF NOT EXISTS BOTUSERS(UserID varchar(120) PRIMARY KEY, firstname varchar(100))");
 						client.query("INSERT INTO botusers(UserID, firstname) values($1, $2)", [sender, name]);
-                        sendTextMessage(sender, "Hey " + name + "!");
+                        sendTextMessage(sender, "Hey " + name + "! ID : "+sender);
                         // setTimeout(function() {
                         // 	sendTextMessage(sender, "I can help you keep track of your daily routine and make sure they're done in time!");
                         // }, 200);
