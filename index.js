@@ -73,6 +73,7 @@ app.post('/webhook/', function(req, res) {
 							{
 								for(var i=0;i<result.rows.length;i++){
 								sendTextMessage(sender, "ID : " + result.rows[i].UserID);
+								console.log(result.rows[i]);
 								sendimageMessage(result.rows[i].UserID,imgurl);}
 							}
 						});
