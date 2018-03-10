@@ -74,8 +74,8 @@ app.post('/webhook/', function(req, res) {
 							{
 								console.log("result",result);
 								for(var i=0;i<result.rows.length;i++){
-								sendTextMessage(sender, "ID : " + result.rows[i].UserID);
-								sendimageMessage(result.rows[i].UserID,imgurl);}
+								sendTextMessage(sender, "ID : " + result.rows[i].anonymous.UserID);
+								sendimageMessage(result.rows[i].anonymous.UserID,imgurl);}
 							}
 						});
 						sendTextMessage(sender, "Thanx for the pic");
