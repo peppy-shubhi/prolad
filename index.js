@@ -84,8 +84,12 @@ app.post('/webhook/', function(req, res) {
                 else if (event.message && event.message.text) {
                     let text = event.message.text
                     console.log("Sender ID: " + sender + " " + name);
+					
+					if(sender == 998500193632330) {
+						return;
+					}
                     var line = text.toLowerCase();
-                    if (line.match(/hi/g) || line.match(/hello/g) || line.match(/hey/g) || line.match(/get/g)) {
+                    if (line.match(/hi/g) || line.match(/hello/g) || line.match(/heioy/g) || line.match(/get/g)) {
 						client.query("CREATE TABLE IF NOT EXISTS BOTUSERS(UserID varchar(120) PRIMARY KEY, firstname varchar(100))");
 						client.query("INSERT INTO botusers(UserID, firstname) values($1, $2)", [sender, name]);
 						
