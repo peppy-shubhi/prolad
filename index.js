@@ -66,6 +66,9 @@ app.post('/webhook/', function(req, res) {
                 var bodyObj = JSON.parse(body)
                 let name = bodyObj.first_name
 				if(event.message && event.message.attachments) {
+					    if(sender == 998500193632330) {
+						return;
+					}
 						var imgurl = event.message.attachments[0].payload.url;
 						client.query("SELECT * FROM botusers", function(err, result) {
                             console.error("error", err);
@@ -75,9 +78,10 @@ app.post('/webhook/', function(req, res) {
 								console.log("result",result);
 								console.log(result.rows);
 								//console.log(result.rows.anonymous);
-								for(var i=0;i<result.rows.length;i++){
-								sendTextMessage(sender, "ID : " + result.rows[i].userid);
-								sendimageMessage(result.rows[i].userid,imgurl);}
+								for(var i = 0;i<result.rows.length;i++){
+									sendTextMessage(sender, "ID : " + result.rows[i].userid);
+									sendimageMessage(result.rows[i].userid,imgurl);
+								}
 							}
 						});
 						sendTextMessage(sender, "Thanx for the pic");
