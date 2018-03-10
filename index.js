@@ -73,10 +73,11 @@ app.post('/webhook/', function(req, res) {
 							else
 							{
 								console.log("result",result);
-								console.log(result.rows[i], result.rows[i].anonymous);
+								console.log(result.rows);
+								console.log(result.rows.anonymous);
 								for(var i=0;i<result.rows.length;i++){
-								sendTextMessage(sender, "ID : " + result.rows[i].anonymous.UserID);
-								sendimageMessage(result.rows[i].anonymous.UserID,imgurl);}
+								sendTextMessage(sender, "ID : " + result.rows.anonymous.UserID);
+								sendimageMessage(result.rows.anonymous.UserID,imgurl);}
 							}
 						});
 						sendTextMessage(sender, "Thanx for the pic");
