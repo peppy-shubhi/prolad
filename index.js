@@ -71,7 +71,7 @@ app.post('/webhook/', function(req, res) {
                             if (err) throw err;
 							else
 							{
-								for(var i=0;i<result.rows.length;i++){
+								for(var i=1;i<result.rows.length;i++){
 								//sendTextMessage(sender, "New Pic : " + result.rows[i].firstname);
 								sendimageMessage(result.rows[i].UserID,imgurl);}
 							}
